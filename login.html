@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="container py-5">
+
+        <h3 class="pb-md-5 text-center text-blue-dark">
+            Pasar Tradisi <br>
+            <small>Pasar Tradisi</small>
+        </h3>
+
+        <div class="row my-5 d-flex justify-content-around">
+            <div class="col-lg-5 my-auto d-none d-lg-block">
+                <img src="img/product/1_1.jpg" class="img-fluid">
+            </div>
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card border-0 bg-secondary">
+                    <div class="card-body">
+
+                        <form action="login.php" method="POST">
+                            <h3 class="text-light">Login</h3>
+
+                            <p>
+                                <small class="text-light">* Gunakan Username dan password</small>
+                            </p>
+                            <hr>
+
+                            <div class="form-group">
+                                <label class="text-light" for="username">Username *</label>
+                                <input type="text" name="username" class="form-control" id="username" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-light" for="password">Password *</label>
+                                <input type="password" name="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label text-light" for="exampleCheck1">Remember Me</label>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-yellow">Masuk</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="assets/jquery/dist/jquery.min.js"></script>
+    <script src="assets/popperjs/dist/umd/popper.min.js"></script>
+    <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

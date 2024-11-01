@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pasar Tradisi</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.slider').bxSlider({
+            auto: true,
+            autoControls: true,
+            stopAutoOnClick: true,
+            pager: true
+        });
+
+        $('.add-to-cart').on('click', function (e) {
+            e.preventDefault();
+            const product = $(this).closest('.product');
+            const productName = product.find('h2').text();
+            const productPrice = product.find('p').text();
+            const productImage = product.find('img').attr('src');
+
+            addToCart(productName, productPrice, productImage);
+        });
+    });
+
+    function addToCart(name, price, image) {
+        const existingItem = $(`.cart-item tbody tr:has(td:contains('${name}'))`);
+        if (existingItem.length) {
+            const quantity = parseInt(existingItem.find('.center').last().text()) + 1;
+            existingItem.find('.center').last().text(quantity);
+        } else {
+            const cartItem = `
+                <tr>
+                    <td><img src="${image}" alt="${name}"></td>
+                    <td>${name}</td>
+                    <td class="center">${price}</td>
+                    <td class="center">${price}</td>
+                    <td class="center">1</td>
+                </tr>
+            `;
+            $('.cart-item tbody').append(cartItem);
+        }
+
+        updateTotal();
+    }
+
+    function updateTotal() {
+        let total = 0;
+        $('.cart-item tbody tr').each(function () {
+            const price = parseFloat($(this).find('.center').eq(0).text());
+            const quantity = parseInt($(this).find('.center').eq(3).text());
+            total += price * quantity;
+        });
+        $('.total').text(total.toFixed(2));
+    }
+</script>
+
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<div class="brand">
+				<div class="logo">
+					<a href="index.html">
+						<img src="handcraft.png" style="width:80px;height:80px;">
+						<div class="logo-text">
+							<p class="big-logo">Pasar</p>
+							<p class="small-logo">Tradisi</p>
+						</div>
+					</a>
+				</div>
+				<div class="shop-icon">
+					<div class="dropdown">
+						<img src="img/icons/account.png">
+						<div class="dropdown-menu">
+							<ul>
+								<li><a href="account.html">Akun Saya</a></li>
+								<li><a href="orders.html">Pesanan Saya</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="dropdown">
+						<img src="img/icons/heart.png">
+						<div class="dropdown-menu wishlist-item">
+							<table border="1">
+								<thead>
+									<tr>
+										<th>Gambar</th>
+										<th>Nama Produk</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><img src="img/product/img1.jpg"></td>
+										<td>nama produk</td>
+									</tr>
+									<tr>
+										<td><img src="img/product/img2.jpg"></td>
+										<td>nama produk</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="dropdown">
+						<img src="img/icons/shopping_cart.png">
+						<div class="dropdown-menu cart-item">
+							<table border="1">
+								<thead>
+									<tr>
+										<th>Gambar</th>
+										<th>Nama Produk</th>
+										<th class="center">Harga</th>
+										<th class="center">Total Harga.</th>
+										<th class="center">Jumlah</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Items will be added here dynamically -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="menu-bar">
+				<div class="menu">
+					<ul>
+						<li><a href="index.html">Beranda</a></li>
+						<li><a href="shop.html">Toko</a></li>
+						<li><a href="about.html">Tentang</a></li>
+						<li><a href="contact.html">Kontak</a></li>
+					</ul>
+				</div>
+				<div class="search-bar">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" name="search" placeholder="Search">
+							<img src="img/icons/search.png">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<main>
+			<div class="slider">
+				<div class="slide-1">
+					<img src="img/slider/slide-1.jpg">
+					<div class="slider-text">
+						<h2>Hiasan dan Miniatur</h2>
+					</div>
+				</div>
+				<div class="slide-2">
+					<img src="img/slider/slide-2.jpg">
+					<div class="slider-text">
+						<h2>Kerajinan Batik Kayu</h2>
+					</div>
+				</div>
+				<div class="slide-3">
+					<img src="img/slider/slide-3.jpg">
+					<div class="slider-text">
+						<h2>Tas Berbahan Kulit</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="new-product-section">
+				<div class="product-section-heading">
+					<h2>PRODUK YANG TERSEDIA <img src="img/icons/increase.png"></h2>
+				</div>
+				<div class="product-content">
+					<div class="product">
+						<a href="product.html">
+							<img src="img/product/img1.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Tas Berbahan Kulit</h3>
+							<h2>Tas Ransel Kulit Sapi Original Pria</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 730.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product2.html">
+							<img src="img/product/img2.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Tas Berbahan Kulit</h3>
+							<h2>Tas Selempang Kulit Sapi Original Pria</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 250.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product3.html">
+							<img src="img/product/img3.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Tas Berbahan Kulit</h3>
+							<h2>Tas Ransel Kulit Sapi Original Wanita</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 720.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product4.html">
+							<img src="img/product/img4.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Kerajinan Batik Kayu</h3>
+							<h2>Topeng Kayu Motif Batik</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 120.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product5.html">
+							<img src="img/product/img5.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Kerajinan Batik Kayu</h3>
+							<h2>Batik Keris Gelang Kayu Batik</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 30.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product6.html">
+							<img src="img/product/img6.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Kerajinan Batik Kayu</h3>
+							<h2>Gantungan Kunci Wayang Batik</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 10.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product7.html">
+							<img src="img/product/img7.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Hiasan / Miniatur</h3>
+							<h2>Miniatur Becak</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 85.000</p>
+						</div>
+					</div>
+					<div class="product">
+						<a href="product8.html">
+							<img src="img/product/img8.jpg">
+						</a>
+						<div class="product-detail">
+							<h3>Kerajinan / Miniatur</h3>
+							<h2>Miniatur Tugu Jogja</h2>
+							<a href="#" class="add-to-cart">Add to Cart</a>
+							<p>Rp. 35.000</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="footer-widget">
+				<div class="widget">
+					<div class="widget-heading">
+						<h3>Link Penting</h3>
+					</div>
+					<div class="widget-content">
+						<ul>
+							<li><a href="about.html">Tentang Kami</a></li>
+							<li><a href="contact.html">Kontak</a></li>
+							<li><a href="refund.html">Kebijakan Pengembalian Dana</a></li>
+							<li><a href="terms.html">Ketentuan dan Kondisi</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="widget-heading">
+						<h3>Informasi</h3>
+					</div>
+					<div class="widget-content">
+						<ul>
+							<li><a href="account.html">Akun Saya</a></li>
+							
+							<li><a href="cart.html">Keranjang</a></li>
+							<li><a href="checkout.html">Checkout</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="widget-heading">
+						<h3>Follow Kami</h3>
+					</div>
+					<div class="widget-content">
+						<div class="follow">
+							<ul>
+								<li><a href="#"><img src="img/icons/facebook.png"></a></li>
+								<li><a href="#"><img src="img/icons/twitter.png"></a></li>
+								<li><a href="#"><img src="img/icons/instagram.png"></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="widget-heading">
+						<h3>Subscribe untuk Info Terbaru!</h3>
+					</div>
+					<div class="widget-content">
+						<div class="subscribe">
+							<form>
+								<div class="form-group">
+									<input type="text" class="form-control" name="subscribe" placeholder="Email">
+									<img src="img/icons/paper_plane.png">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bar">
+				<div class="payment-mode">
+					<img src="img/icons/paper_money.png">
+					<img src="img/icons/visa.png">
+					<img src="img/icons/mastercard.png">
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
